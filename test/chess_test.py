@@ -46,24 +46,24 @@ def test_emptyBoard_Queen_moves():
 
 
 def test_emptyBoard_Rook_moves():
-    chess_board = Board()
-    rook = chess_class.Rook("A1")
-    chess_board.place_piece("A1", "Rook")
+    chessboard = Board()
+    rook = chess_class.Rook("A1", chessboard.board)
+    chessboard.place_piece("A1", "Rook")
     assert rook.list_available_moves() == [
-        "A2",
-        "A3",
-        "A4",
-        "A5",
-        "A6",
-        "A7",
-        "A8",
-        "B1",
-        "C1",
-        "D1",
-        "E1",
-        "F1",
-        "G1",
-        "H1",
+        "b1",
+        "c1",
+        "d1",
+        "e1",
+        "f1",
+        "g1",
+        "h1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6",
+        "a7",
+        "a8",
     ]
 
 

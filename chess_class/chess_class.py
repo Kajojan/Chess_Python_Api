@@ -84,7 +84,7 @@ class Queen(Figure):
                     new_position = chr(col + ord("a")) + str(r + 1)
                     possible_moves.append(new_position)
 
-        # Poruszanie się po przekątnych
+       
         for dx in range(-8, 9):
             if dx != 0:
                 if 0 <= row + dx <= 7 and 0 <= col + dx <= 7:
@@ -108,12 +108,28 @@ class Queen(Figure):
 
 
 class Rook(Figure):
-    def __init__(self, position):
+    def __init__(self, position,board):
         super().__init__(position)
+        self.board = board
 
     def list_available_moves(self) -> list:
-        return []
+        col, row = getRowCol(self.position)
+        possible_moves = []
 
+        for c in range(8):
+            if c != col:
+                if self.board[row][c] == " ":
+                    new_position = chr(c + ord("a")) + str(row + 1)
+                    possible_moves.append(new_position)
+
+        for r in range(8):
+            if r != row:
+                if self.board[r][col] == " ":
+                    new_position = chr(col + ord("a")) + str(r + 1)
+                    possible_moves.append(new_position)
+
+        print(possible_moves)
+        return possible_moves
     def validate_move(dest_field) -> bool:
         True
 
