@@ -1,5 +1,6 @@
 import pytest
 import sys
+from flask import Flask
 
 sys.path.append("../chess_class/")
 sys.path.append("../")
@@ -11,10 +12,11 @@ import chess_class
 
 
 def test_emptyBoard_King_moves():
-    chess_board = Board()
-    king = chess_class.King("E1")
-    chess_board.place_piece("E1", "King")
-    assert king.list_available_moves() == ["E2", "F1", "D1"]
+    chessboard = Board()
+    chessboard.place_piece("E4", "King")
+    king = chess_class.King("E1", chessboard.board)
+    moves = king.list_available_moves()
+    assert moves == ["d1", "d2", "e2", "f1", "f2"]
 
 
 def test_emptyBoard_Queen_moves():
