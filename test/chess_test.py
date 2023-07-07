@@ -1,23 +1,24 @@
 import pytest
 import sys
-import board
-import chess_class
 
 sys.path.append("../chess_class/")
+sys.path.append("../")
+from board import Board
+import chess_class
 
 
 # figure movements on empty board
 
 
 def test_emptyBoard_King_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     king = chess_class.King("E1")
     chess_board.place_piece("E1", "King")
     assert king.list_available_moves() == ["E2", "F1", "D1"]
 
 
 def test_emptyBoard_Queen_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     queen = chess_class.Queen("D1")
     chess_board.place_piece("D1", "Queen")
     assert queen.list_available_moves() == [
@@ -46,7 +47,7 @@ def test_emptyBoard_Queen_moves():
 
 
 def test_emptyBoard_Rook_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     rook = chess_class.Rook("A1")
     chess_board.place_piece("A1", "Rook")
     assert rook.list_available_moves() == [
@@ -68,21 +69,21 @@ def test_emptyBoard_Rook_moves():
 
 
 def test_emptyBoard_Bishop_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     bishop = chess_class.Bishop("C1")
     chess_board.place_piece("C1", "Bishop")
     assert bishop.list_available_moves() == ["A3", "B2", "D2", "E3", "F4", "G5", "H6"]
 
 
 def test_emptyBoard_Knight_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     knight = chess_class.Knight("B1")
     chess_board.place_piece("B1", "Knight")
     assert knight.list_available_moves() == ["A3", "C3", "D2"]
 
 
 def test_emptyBoard_Pawns_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     pawn = chess_class.Knight("A2")
     chess_board.place_piece("A2", "Pawn")
     assert pawn.list_available_moves() == ["A3"]
@@ -92,7 +93,7 @@ def test_emptyBoard_Pawns_moves():
 
 
 def test_not_emptyBoard_King_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     king = chess_class.King("E1")
     chess_board.place_piece("F1", "Bishop")
     chess_board.place_piece("D1", "Queen")
@@ -100,7 +101,7 @@ def test_not_emptyBoard_King_moves():
 
 
 def test_not_emptyBoard_Queen_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     queen = chess_class.Queen("D1")
     chess_board.place_piece("D1", "Queen")
     chess_board.place_piece("C1", "Bishop")
@@ -117,7 +118,7 @@ def test_not_emptyBoard_Queen_moves():
 
 
 def test_not_emptyBoard_Rook_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     rook = chess_class.Rook("A1")
     chess_board.place_piece("A1", "Rook")
     chess_board.place_piece("A5", "Pawn")
@@ -135,7 +136,7 @@ def test_not_emptyBoard_Rook_moves():
 
 
 def test_not_emptyBoard_Bishop_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     bishop = chess_class.Bishop("C1")
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("A3", "Pawn")
@@ -144,7 +145,7 @@ def test_not_emptyBoard_Bishop_moves():
 
 
 def test_not_emptyBoard_Knight_moves():
-    chess_board = board.Board()
+    chess_board = Board()
     knight = chess_class.Knight("B1")
     chess_board.place_piece("B1", "Knight")
     chess_board.place_piece("A3", "Pawn")
@@ -154,8 +155,8 @@ def test_not_emptyBoard_Knight_moves():
 
 
 def test_not_emptyBoard_Pawns_moves():
-    chess_board = board.Board()
-    pawn = chess_class.Knight("A2")
+    chess_board = Board()
+    pawn = chess_class.Pawns("A2")
     chess_board.place_piece("A2", "Pawn")
     chess_board.place_piece("A3", "Bishop")
     assert pawn.list_available_moves() == []
