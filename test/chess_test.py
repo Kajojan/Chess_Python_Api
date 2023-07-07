@@ -20,31 +20,28 @@ def test_emptyBoard_King_moves():
 
 
 def test_emptyBoard_Queen_moves():
-    chess_board = Board()
-    queen = chess_class.Queen("D1")
-    chess_board.place_piece("D1", "Queen")
+    chessboard = Board()
+    chessboard.place_piece("D1", "Queen")
+    queen = chess_class.Queen("D1", chessboard.board)
     assert queen.list_available_moves() == [
-        "D2",
-        "D3",
-        "D4",
-        "D5",
-        "D6",
-        "D7",
-        "D8",
-        "A1",
-        "B1",
-        "C1",
-        "E1",
-        "F1",
-        "G1",
-        "H1",
-        "A4",
-        "B3",
-        "C2",
-        "E2",
-        "F3",
-        "G4",
-        "H5",
+        "a1",
+        "b1",
+        "c1",
+        "e1",
+        "f1",
+        "g1",
+        "h1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d8",
+        "e2",
+        "f3",
+        "g4",
+        "h5",
     ]
 
 
