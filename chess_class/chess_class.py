@@ -135,33 +135,102 @@ class Rook(Figure):
 
 
 class Bishop(Figure):
-    def __init__(self, position):
+    def __init__(self, position, board):
         super().__init__(position)
+        self.board=board
 
     def list_available_moves(self) -> list:
-        return []
+        col, row = getRowCol(self.position)
+        possible_moves = []
+
+        for i in range(1, 8):
+            new_col = col - i
+            new_row = row - i
+            if new_col >= 0 and new_row >= 0:
+                if self.board[new_row][new_col] == " ":
+                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
+                    possible_moves.append(new_position)
+            else:
+                break
+
+        for i in range(1, 8):
+            new_col = col + i
+            new_row = row - i
+            if new_col <= 7 and new_row >= 0:
+                 if self.board[new_row][new_col] == " ":
+                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
+                    possible_moves.append(new_position)
+            else:
+                break
+        
+        for i in range(1, 8):
+            new_col = col - i
+            new_row = row + i
+            if new_col >= 0 and new_row <= 7:
+                if self.board[new_row][new_col] == " ":
+                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
+                    possible_moves.append(new_position)
+            else:
+                break
+        
+        for i in range(1, 8):
+            new_col = col + i
+            new_row = row + i
+            if new_col <= 7 and new_row <= 7:
+                if self.board[new_row][new_col] == " ":
+                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
+                    possible_moves.append(new_position)
+            else:
+                break
+        print(possible_moves)
+        return possible_moves
 
     def validate_move(dest_field) -> bool:
         True
 
 
 class Knight(Figure):
-    def __init__(self, position):
+    def __init__(self, position,board):
         super().__init__(position)
+        self.board=board
 
     def list_available_moves(self) -> list:
-        return []
+        col, row = getRowCol(self.position)
+        possible_moves = []
+        moves = [(2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2)]
 
+        for dx, dy in moves:
+                   print(col, dx, row, dy)
+                   new_col = col + dx
+                   new_row = row + dy
+                   if 0 <= new_col <= 7 and 0 <= new_row <= 7:
+                       if self.board[new_row][new_col] == " ":
+                            new_position = chr(new_col + ord("a")) + str(new_row + 1)
+                            possible_moves.append(new_position)
+        
+        return possible_moves
     def validate_move(dest_field) -> bool:
         True
 
 
 class Pawns(Figure):
-    def __init__(self, position):
+    def __init__(self, position,board):
         super().__init__(position)
-
+        self.board=board
     def list_available_moves(self) -> list:
-        return []
-
+        col, row = getRowCol(self.position)
+        possible_moves = []
+        if(row == 1):
+            if self.board[row+1][col] == " ":
+                            new_position = chr(col + ord("a")) + str(row+1 + 1)
+                            possible_moves.append(new_position)
+            if self.board[row+2][col] == " ":
+                            new_position = chr(col + ord("a")) + str(row+2 + 1)
+                            possible_moves.append(new_position)
+        else:
+            if self.board[row+1][col] == " ":
+                            new_position = chr(col + ord("a")) + str(row+1 + 1)
+                            possible_moves.append(new_position)
+        return possible_moves
     def validate_move(dest_field) -> bool:
         True
