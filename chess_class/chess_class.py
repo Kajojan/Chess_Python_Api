@@ -15,7 +15,10 @@ class Figure(ABC):
 
 
 class King(Figure):
-    def list_available_moves() -> list:
+    def __init__(self, position):
+        super().__init__(position)
+
+    def list_available_moves(self) -> list:
         return []
 
     def validate_move(dest_field) -> list:
@@ -23,7 +26,10 @@ class King(Figure):
 
 
 class Queen(Figure):
-    def list_available_moves() -> list:
+    def __init__(self, position):
+        super().__init__(position)
+
+    def list_available_moves(self) -> list:
         return []
 
     def validate_move(dest_field) -> list:
@@ -31,7 +37,9 @@ class Queen(Figure):
 
 
 class Rook(Figure):
-    def list_available_moves() -> list:
+    def __init__(self, position):
+        super().__init__(position)
+    def list_available_moves(self) -> list:
         return []
 
     def validate_move(dest_field) -> list:
@@ -39,7 +47,9 @@ class Rook(Figure):
 
 
 class Bishop(Figure):
-    def list_available_moves() -> list:
+    def __init__(self, position):
+        super().__init__(position)
+    def list_available_moves(self) -> list:
         return []
 
     def validate_move(dest_field) -> list:
@@ -47,7 +57,9 @@ class Bishop(Figure):
 
 
 class Knight(Figure):
-    def list_available_moves() -> list:
+    def __init__(self, position):
+        super().__init__(position)
+    def list_available_moves(self) -> list:
         return []
 
     def validate_move(dest_field) -> list:
@@ -55,7 +67,9 @@ class Knight(Figure):
 
 
 class Pawns(Figure):
-    def list_available_moves() -> list:
+    def __init__(self, position):
+        super().__init__(position)
+    def list_available_moves(self) -> list:
         return []
 
     def validate_move(dest_field) -> list:
