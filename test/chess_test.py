@@ -68,10 +68,10 @@ def test_emptyBoard_Rook_moves():
 
 
 def test_emptyBoard_Bishop_moves():
-    chess_board = Board()
-    bishop = chess_class.Bishop("C1")
-    chess_board.place_piece("C1", "Bishop")
-    assert bishop.list_available_moves() == ["A3", "B2", "D2", "E3", "F4", "G5", "H6"]
+    chessboard = Board()
+    bishop = chess_class.Bishop("C1", chessboard.board)
+    chessboard.place_piece("C1", "Bishop")
+    assert bishop.list_available_moves() == ['b2', 'a3', 'd2', 'e3', 'f4', 'g5', 'h6']
 
 
 def test_emptyBoard_Knight_moves():
