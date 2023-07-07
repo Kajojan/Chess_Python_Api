@@ -97,6 +97,7 @@ def test_not_emptyBoard_King_moves():
     king = chess_class.King("E1")
     chess_board.place_piece("F1", "Bishop")
     chess_board.place_piece("D1", "Queen")
+    chess_board.place_piece("E1", "King")
     assert king.list_available_moves() == ["E2"]
 
 
@@ -160,3 +161,94 @@ def test_not_emptyBoard_Pawns_moves():
     chess_board.place_piece("A2", "Pawn")
     chess_board.place_piece("A3", "Bishop")
     assert pawn.list_available_moves() == []
+
+
+# validate move test
+
+
+def test_validate_move_King():
+    chess_board = Board()
+    king = chess_class.King("E1")
+    chess_board.place_piece("E1", "King")
+    chess_board.place_piece("F1", "Bishop")
+    chess_board.place_piece("D1", "Queen")
+    assert king.validate_move("E2") is True
+    assert king.validate_move("F1") is False
+
+
+def test_validate_move_Queen():
+    chess_board = Board()
+    queen = chess_class.Queen("D1")
+    chess_board.place_piece("D1", "Queen")
+    chess_board.place_piece("C1", "Bishop")
+    chess_board.place_piece("E1", "King")
+    assert queen.validate_move("D2") is True
+    assert queen.validate_move("C1") is False
+
+
+def test_validate_move_Rook():
+    chess_board = Board()
+    rook = chess_class.Rook("A1")
+    chess_board.place_piece("A1", "Rook")
+    chess_board.place_piece("A5", "Pawn")
+    chess_board.place_piece("G1", "Knight")
+    assert rook.validate_move("A2") is True
+    assert rook.validate_move("A5") is False
+
+
+def test_validate_move_Bishop():
+    chess_board = Board()
+    bishop = chess_class.Bishop("C1")
+    chess_board.place_piece("C1", "Bishop")
+    chess_board.place_piece("A3", "Pawn")
+    chess_board.place_piece("F4", "Pawn")
+    assert bishop.validate_move("B2") is True
+    assert bishop.validate_move("F4") is False
+
+
+def test_validate_move_Knight():
+    chess_board = Board()
+    knight = chess_class.Knight("B1")
+    chess_board.place_piece("B1", "Knight")
+    chess_board.place_piece("A3", "Pawn")
+    chess_board.place_piece("C3", "Pawn")
+    assert knight.validate_move("D2") is True
+    assert knight.validate_move("C2") is False
+
+
+def test_validate_move_Pawns():
+    chess_board = Board()
+    pawn = chess_class.Pawns("A2")
+    chess_board.place_piece("A2", "Pawn")
+    assert pawn.validate_move("A3") is True
+    assert pawn.validate_move("B2") is False
+
+
+# board tests
+
+
+def test_board_place_piece_invalid_column():
+    with pytest.raises(ValueError) as erro:
+        chess_board = Board()
+        chess_board.place_piece("Z2", "Pawn")
+
+    exception_message = str(erro.value)
+    assert exception_message == "Invalid column value"
+
+
+def test_board_place_piece_invalid_row():
+    with pytest.raises(ValueError) as erro:
+        chess_board = Board()
+        chess_board.place_piece("A9", "Pawn")
+
+    exception_message = str(erro.value)
+    assert exception_message == "Invalid row value"
+
+
+def test_board_place_piece_invalid_column_and_row():
+    with pytest.raises(ValueError) as erro:
+        chess_board = Board()
+        chess_board.place_piece("Z9", "Pawn")
+
+    exception_message = str(erro.value)
+    assert exception_message == "Invalid column and row values"
