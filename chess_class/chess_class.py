@@ -48,14 +48,20 @@ class King(Figure):
                 print(new_col)
                 print(new_row)
                 print(self.board.query.filter_by(position=self.position).first())
-                if 0 <= new_col <= 8 and 0 <= new_row <= 8  :
-                    new_position = chr(new_col + ord('a')) + str(new_row + 1)
+                new_position = chr(new_col + ord('a')) + str(new_row + 1)
+
+                if 0 <= new_col <= 8 and 0 <= new_row <= 8  and self.board.query.filter_by(position=new_position).first() == None:
                     possible_moves.append(new_position)
 
         return possible_moves
     
-    def validate_move(dest_field) -> bool:
-        True
+    def validate_move(self,dest_field) -> bool:
+        posible_move = self.list_available_moves()
+        dest_field = dest_field.lower()
+        if(dest_field in posible_move):
+            return "valid"
+        else:
+            return "invalid"
 
 
 class Queen(Figure):
