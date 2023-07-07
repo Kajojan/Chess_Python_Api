@@ -75,17 +75,17 @@ def test_emptyBoard_Bishop_moves():
 
 
 def test_emptyBoard_Knight_moves():
-    chess_board = Board()
-    knight = chess_class.Knight("B1")
-    chess_board.place_piece("B1", "Knight")
-    assert knight.list_available_moves() == ["A3", "C3", "D2"]
+    chessboard = Board()
+    knight = chess_class.Knight("B1", chessboard.board)
+    chessboard.place_piece("B1", "Knight")
+    assert knight.list_available_moves() == ['d2', 'c3', 'a3']
 
 
 def test_emptyBoard_Pawns_moves():
     chess_board = Board()
-    pawn = chess_class.Knight("A2")
+    pawn = chess_class.Pawns("A2", chess_board.board)
     chess_board.place_piece("A2", "Pawn")
-    assert pawn.list_available_moves() == ["A3"]
+    assert pawn.list_available_moves() == ["a3", "a4"]
 
 
 # figure movements on not empty board
