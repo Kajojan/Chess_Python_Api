@@ -98,16 +98,7 @@ def test_not_emptyBoard_Rook_moves():
     chess_board.place_piece("A1", "Rook")
     chess_board.place_piece("A5", "Pawn")
     chess_board.place_piece("G1", "Knight")
-    assert rook.list_available_moves() == [
-        "A2",
-        "A3",
-        "A4",
-        "B1",
-        "C1",
-        "D1",
-        "E1",
-        "F1",
-    ]
+    assert rook.list_available_moves() == ['b1', 'c1', 'd1', 'e1', 'f1', 'a2', 'a3', 'a4']
 
 
 def test_not_emptyBoard_Bishop_moves():

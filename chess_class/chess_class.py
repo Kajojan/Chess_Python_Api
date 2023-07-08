@@ -83,28 +83,24 @@ class Queen(Figure):
 
         # left
         for new_col in range(col - 1, -1, -1):
-            new_position = chr(new_col + ord("a")) + str(row + 1)
             if 0 <= row  <= 7 and 0 <= new_col <= 7:
                    if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
                         break
 
         #right
         for new_col in range(col + 1, 8):
-            new_position = chr(new_col + ord("a")) + str(row + 1)
             if 0 <= row  <= 7 and 0 <= new_col <= 7:
                 if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
                         break
 
        #down
         for new_row in range(row - 1, -1, -1):
-            new_position = chr(col + ord("a")) + str(new_row + 1)
             if 0 <= new_row  <= 7 and 0 <= col <= 7:
                     if not add_possible_move_if_empty(new_row,col,possible_moves,self.board):
                         break
 
         #up
         for new_row in range(row + 1, 8):
-            new_position = chr(col + ord("a")) + str(new_row + 1)
             if 0 <= new_row  <= 7 and 0 <= col <= 7:
                    if not add_possible_move_if_empty(new_row,col,possible_moves,self.board):
                         break
@@ -144,18 +140,28 @@ class Rook(Figure):
         col, row = getRowCol(self.position)
         possible_moves = []
 
-        for c in range(8):
-            if c != col:
-                if self.board[row][c] == " ":
-                    new_position = chr(c + ord("a")) + str(row + 1)
-                    possible_moves.append(new_position)
+        for new_col in range(col - 1, -1, -1):
+            if 0 <= row  <= 7 and 0 <= new_col <= 7:
+                   if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
+                        break
 
-        for r in range(8):
-            if r != row:
-                if self.board[r][col] == " ":
-                    new_position = chr(col + ord("a")) + str(r + 1)
-                    possible_moves.append(new_position)
+       
+        for new_col in range(col + 1, 8):
+            if 0 <= row  <= 7 and 0 <= new_col <= 7:
+                if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
+                        break
 
+      
+        for new_row in range(row - 1, -1, -1):
+            if 0 <= new_row  <= 7 and 0 <= col <= 7:
+                    if not add_possible_move_if_empty(new_row,col,possible_moves,self.board):
+                        break
+
+        for new_row in range(row + 1, 8):
+            if 0 <= new_row  <= 7 and 0 <= col <= 7:
+                   if not add_possible_move_if_empty(new_row,col,possible_moves,self.board):
+                        break
+                   
         print(possible_moves)
         return possible_moves
     def validate_move(dest_field) -> bool:
