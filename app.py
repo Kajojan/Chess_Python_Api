@@ -1,6 +1,5 @@
 from flask import Flask
 
-from chess_class.chess_class import King
 from board import Board
 
 app = Flask(__name__)
@@ -9,10 +8,16 @@ chessboard.place_piece("E4", "King")
 chessboard.place_piece("E3", "King")
 
 
-@app.route("/")
-def index():
-    ches = King("E4", chessboard.board)
-    return f" move: {ches.list_available_moves()}, move: {ches.validate_move('D3') }"
+@app.route("/api/v1/<chess_figure>/<current_field>/")
+def aviablemoves(chess_figure, current_field):
+    figure_class = globals()[chess_figure.lower().capitalize()]
+    ches = figure_class(f"{current_field}", chessboard.board)
+    return {
+        "availableMoves": list(ches.list_available_moves()),
+        "error": None,
+        "figure": chess_figure,
+        "current_field": current_field,
+    }
 
 
 if __name__ == "__main__":
