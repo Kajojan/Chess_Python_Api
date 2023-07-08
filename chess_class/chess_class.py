@@ -21,6 +21,13 @@ def add_possible_move_if_empty(row, col, possible_moves,board):
         return True
     else:
         return False
+    
+def valid(posible_move,dest_field):
+    dest_field = dest_field.lower()
+    if dest_field in posible_move:
+        return True
+    else:
+        return False
 
 
 class Figure(ABC):
@@ -61,11 +68,7 @@ class King(Figure):
 
     def validate_move(self, dest_field) -> bool:
         posible_move = self.list_available_moves()
-        dest_field = dest_field.lower()
-        if dest_field in posible_move:
-            return "valid"
-        else:
-            return "invalid"
+        return valid(posible_move,dest_field)
 
 
 class Queen(Figure):
@@ -125,8 +128,9 @@ class Queen(Figure):
         print(possible_moves)
         return possible_moves
 
-    def validate_move(dest_field) -> bool:
-        True
+    def validate_move(self,dest_field) -> bool:
+        posible_move = self.list_available_moves()
+        return valid(posible_move,dest_field)
 
 
 class Rook(Figure):
@@ -159,8 +163,9 @@ class Rook(Figure):
                         break
                    
         return possible_moves
-    def validate_move(dest_field) -> bool:
-        True
+    def validate_move(self, dest_field) -> bool:
+        posible_move = self.list_available_moves()
+        return valid(posible_move,dest_field)
 
 
 class Bishop(Figure):
@@ -195,8 +200,9 @@ class Bishop(Figure):
         print(possible_moves)
         return possible_moves
 
-    def validate_move(dest_field) -> bool:
-        True
+    def validate_move(self, dest_field) -> bool:
+        posible_move = self.list_available_moves()
+        return valid(posible_move,dest_field)
 
 
 class Knight(Figure):
@@ -218,8 +224,9 @@ class Knight(Figure):
                             possible_moves.append(new_position)
         
         return possible_moves
-    def validate_move(dest_field) -> bool:
-        True
+    def validate_move(self, dest_field) -> bool:
+        posible_move = self.list_available_moves()
+        return valid(posible_move,dest_field)
 
 
 class Pawns(Figure):
@@ -241,5 +248,6 @@ class Pawns(Figure):
                             new_position = chr(col + ord("a")) + str(row+1 + 1)
                             possible_moves.append(new_position)
         return possible_moves
-    def validate_move(dest_field) -> bool:
-        True
+    def validate_move(self, dest_field) -> bool:
+        posible_move = self.list_available_moves()
+        return valid(posible_move,dest_field)

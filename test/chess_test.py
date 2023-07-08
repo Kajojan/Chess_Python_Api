@@ -130,20 +130,21 @@ def test_not_emptyBoard_Pawns_moves():
 
 def test_validate_move_King():
     chess_board = Board()
-    king = chess_class.King("E1",chess_board.board)
     chess_board.place_piece("E1", "King")
     chess_board.place_piece("F1", "Bishop")
     chess_board.place_piece("D1", "Queen")
+    king = chess_class.King("E1",chess_board.board)
     assert king.validate_move("E2") is True
     assert king.validate_move("F1") is False
 
 
 def test_validate_move_Queen():
     chess_board = Board()
-    queen = chess_class.Queen("D1",chess_board.board)
     chess_board.place_piece("D1", "Queen")
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("E1", "King")
+    queen = chess_class.Queen("D1",chess_board.board)
+
     assert queen.validate_move("D2") is True
     assert queen.validate_move("C1") is False
 
