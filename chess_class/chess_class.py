@@ -14,6 +14,15 @@ def getRowCol(position):
         col = ord(col) - ord("a")
     return col, row - 1
 
+def add_possible_move_if_empty(row, col, possible_moves,board):
+    if board[row][col] == " ":
+        new_position = chr(col + ord("a")) + str(row + 1)
+        possible_moves.append(new_position)
+        return True
+    else:
+        print("fasle")
+        return False
+
 
 class Figure(ABC):
     def __init__(self, position):
@@ -72,33 +81,52 @@ class Queen(Figure):
         print(self.position, col, row)
         possible_moves = []
 
-        for c in range(8):
-            if c != col:
-                if self.board[row][c] == " ":
-                    new_position = chr(c + ord("a")) + str(row + 1)
-                    possible_moves.append(new_position)
+        # left
+        for new_col in range(col - 1, -1, -1):
+            new_position = chr(new_col + ord("a")) + str(row + 1)
+            if 0 <= row  <= 7 and 0 <= new_col <= 7:
+                   if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
+                        break
 
-        for r in range(8):
-            if r != row:
-                if self.board[r][col] == " ":
-                    new_position = chr(col + ord("a")) + str(r + 1)
-                    possible_moves.append(new_position)
+        #right
+        for new_col in range(col + 1, 8):
+            new_position = chr(new_col + ord("a")) + str(row + 1)
+            if 0 <= row  <= 7 and 0 <= new_col <= 7:
+                if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
+                        break
 
-       
-        for dx in range(-8, 9):
-            if dx != 0:
-                if 0 <= row + dx <= 7 and 0 <= col + dx <= 7:
-                    print(row + dx, col + dx)
-                    if self.board[row + dx][col + dx] == " ":
-                        new_position = chr(col + dx + ord("a")) + str(row + dx + 1)
-                        possible_moves.append(new_position)
+       #down
+        for new_row in range(row - 1, -1, -1):
+            new_position = chr(col + ord("a")) + str(new_row + 1)
+            if 0 <= new_row  <= 7 and 0 <= col <= 7:
+                    if not add_possible_move_if_empty(new_row,col,possible_moves,self.board):
+                        break
 
-        for dy in range(-8, 9):
-            if dy != 0:
-                if 0 <= row + dx <= 7 and 0 <= col + dx <= 7:
-                    if self.board[row - dy][col + dx] == " ":
-                        new_position = chr(col + dx + ord("a")) + str(row - dy + 1)
-                        possible_moves.append(new_position)
+        #up
+        for new_row in range(row + 1, 8):
+            new_position = chr(col + ord("a")) + str(new_row + 1)
+            if 0 <= new_row  <= 7 and 0 <= col <= 7:
+                   if not add_possible_move_if_empty(new_row,col,possible_moves,self.board):
+                        break
+
+        
+        for i in range(1,8):
+            #left-down
+            if col - i >= 0 and row - i >= 0:
+               if not add_possible_move_if_empty(row - i,col - i,possible_moves,self.board):
+                        break
+            #left-up
+            if col - i >= 0 and row + i < 8:
+                 if not add_possible_move_if_empty(row + i,col - i,possible_moves,self.board):
+                        break
+            #right-down
+            if col + i < 8 and row - i >= 0:
+                 if not add_possible_move_if_empty(row - i,col + i,possible_moves,self.board):
+                        break
+            #right-up
+            if col + i < 8 and row + i < 8:
+                  if not add_possible_move_if_empty(row + i,col + i,possible_moves,self.board):
+                        break
 
         print(possible_moves)
         return possible_moves
