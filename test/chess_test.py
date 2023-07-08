@@ -23,7 +23,7 @@ def test_emptyBoard_Queen_moves():
     chessboard = Board()
     chessboard.place_piece("D1", "Queen")
     queen = chess_class.Queen("D1", chessboard.board)
-    assert queen.list_available_moves() == ['c1', 'b1', 'a1', 'e1', 'f1', 'g1', 'h1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'c2', 'e2', 'b3', 'f3', 'a4', 'g4', 'h5']
+    assert queen.list_available_moves() == ['c1', 'b1', 'a1', 'e1', 'f1', 'g1', 'h1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'c2', 'b3', 'a4', 'e2', 'f3', 'g4', 'h5']
 
 
 def test_emptyBoard_Rook_moves():
@@ -52,7 +52,7 @@ def test_emptyBoard_Bishop_moves():
     chessboard = Board()
     bishop = chess_class.Bishop("C1", chessboard.board)
     chessboard.place_piece("C1", "Bishop")
-    assert bishop.list_available_moves() == ['b2', 'd2', 'a3', 'e3', 'f4', 'g5', 'h6']
+    assert bishop.list_available_moves() == ['b2', 'a3', 'd2', 'e3', 'f4', 'g5', 'h6']
 
 
 def test_emptyBoard_Knight_moves():
@@ -89,9 +89,8 @@ def test_not_emptyBoard_Queen_moves():
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("E1", "King")
     queen = chess_class.Queen("D1",chess_board.board)
-    assert queen.list_available_moves() == ['d2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'c2', 'e2', 'b3', 'f3', 'a4', 'g4', 'h5']
-
-
+    assert queen.list_available_moves() == ['d2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'c2', 'b3', 'a4', 'e2', 'f3', 'g4', 'h5']
+    
 def test_not_emptyBoard_Rook_moves():
     chess_board = Board()
     chess_board.place_piece("A1", "Rook")
@@ -106,7 +105,7 @@ def test_not_emptyBoard_Bishop_moves():
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("A3", "Pawn")
     bishop = chess_class.Bishop("C1",chess_board.board)
-    assert bishop.list_available_moves() == ['b2', 'd2', 'f4', 'g5', 'h6']
+    assert bishop.list_available_moves() == ['b2', 'd2', 'e3', 'f4', 'g5', 'h6']
 
 
 def test_not_emptyBoard_Knight_moves():
