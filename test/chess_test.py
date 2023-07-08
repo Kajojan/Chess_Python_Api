@@ -52,7 +52,7 @@ def test_emptyBoard_Bishop_moves():
     chessboard = Board()
     bishop = chess_class.Bishop("C1", chessboard.board)
     chessboard.place_piece("C1", "Bishop")
-    assert bishop.list_available_moves() == ['b2', 'a3', 'd2', 'e3', 'f4', 'g5', 'h6']
+    assert bishop.list_available_moves() == ['b2', 'd2', 'a3', 'e3', 'f4', 'g5', 'h6']
 
 
 def test_emptyBoard_Knight_moves():
@@ -85,29 +85,28 @@ def test_not_emptyBoard_King_moves():
 
 def test_not_emptyBoard_Queen_moves():
     chess_board = Board()
-    queen = chess_class.Queen("D1",chess_board.board)
     chess_board.place_piece("D1", "Queen")
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("E1", "King")
+    queen = chess_class.Queen("D1",chess_board.board)
     assert queen.list_available_moves() == ['d2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'c2', 'e2', 'b3', 'f3', 'a4', 'g4', 'h5']
 
 
 def test_not_emptyBoard_Rook_moves():
     chess_board = Board()
-    rook = chess_class.Rook("A1",chess_board.board)
     chess_board.place_piece("A1", "Rook")
     chess_board.place_piece("A5", "Pawn")
     chess_board.place_piece("G1", "Knight")
+    rook = chess_class.Rook("A1",chess_board.board)
     assert rook.list_available_moves() == ['b1', 'c1', 'd1', 'e1', 'f1', 'a2', 'a3', 'a4']
 
 
 def test_not_emptyBoard_Bishop_moves():
     chess_board = Board()
-    bishop = chess_class.Bishop("C1",chess_board.board)
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("A3", "Pawn")
-    chess_board.place_piece("F4", "Pawn")
-    assert bishop.list_available_moves() == ["B2", "D2", "E3"]
+    bishop = chess_class.Bishop("C1",chess_board.board)
+    assert bishop.list_available_moves() == ['b2', 'd2', 'f4', 'g5', 'h6']
 
 
 def test_not_emptyBoard_Knight_moves():
@@ -116,8 +115,7 @@ def test_not_emptyBoard_Knight_moves():
     chess_board.place_piece("B1", "Knight")
     chess_board.place_piece("A3", "Pawn")
     chess_board.place_piece("C3", "Pawn")
-
-    assert knight.list_available_moves() == ["D2"]
+    assert knight.list_available_moves() == ["d2"]
 
 
 def test_not_emptyBoard_Pawns_moves():

@@ -15,6 +15,7 @@ def getRowCol(position):
     return col, row - 1
 
 def add_possible_move_if_empty(row, col, possible_moves,board):
+    print(board[row][col] == " ", row,col)
     if board[row][col] == " ":
         new_position = chr(col + ord("a")) + str(row + 1)
         possible_moves.append(new_position)
@@ -110,19 +111,19 @@ class Queen(Figure):
             #left-down
             if col - i >= 0 and row - i >= 0:
                if not add_possible_move_if_empty(row - i,col - i,possible_moves,self.board):
-                        break
+                        continue
             #left-up
             if col - i >= 0 and row + i < 8:
                  if not add_possible_move_if_empty(row + i,col - i,possible_moves,self.board):
-                        break
+                        continue
             #right-down
             if col + i < 8 and row - i >= 0:
                  if not add_possible_move_if_empty(row - i,col + i,possible_moves,self.board):
-                        break
+                        continue
             #right-up
             if col + i < 8 and row + i < 8:
                   if not add_possible_move_if_empty(row + i,col + i,possible_moves,self.board):
-                        break
+                        continue
 
         print(possible_moves)
         return possible_moves
@@ -145,13 +146,11 @@ class Rook(Figure):
                    if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
                         break
 
-       
         for new_col in range(col + 1, 8):
             if 0 <= row  <= 7 and 0 <= new_col <= 7:
                 if not add_possible_move_if_empty(row,new_col,possible_moves,self.board):
                         break
 
-      
         for new_row in range(row - 1, -1, -1):
             if 0 <= new_row  <= 7 and 0 <= col <= 7:
                     if not add_possible_move_if_empty(new_row,col,possible_moves,self.board):
@@ -176,46 +175,25 @@ class Bishop(Figure):
     def list_available_moves(self) -> list:
         col, row = getRowCol(self.position)
         possible_moves = []
+        for i in range(1,8):
+            #left-down
+            if col - i >= 0 and row - i >= 0:
+               if not add_possible_move_if_empty(row - i,col - i,possible_moves,self.board):
+                        continue
+            #left-up
+            if col - i >= 0 and row + i < 8:
+                 if not add_possible_move_if_empty(row + i,col - i,possible_moves,self.board):
+                        print(row+1,col+1)
+                        continue
+            #right-down
+            if col + i < 8 and row - i >= 0:
+                 if not add_possible_move_if_empty(row - i,col + i,possible_moves,self.board):
+                        continue
+            #right-up
+            if col + i < 8 and row + i < 8:
+                  if not add_possible_move_if_empty(row + i,col + i,possible_moves,self.board):
+                        continue
 
-        for i in range(1, 8):
-            new_col = col - i
-            new_row = row - i
-            if new_col >= 0 and new_row >= 0:
-                if self.board[new_row][new_col] == " ":
-                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
-                    possible_moves.append(new_position)
-            else:
-                break
-
-        for i in range(1, 8):
-            new_col = col + i
-            new_row = row - i
-            if new_col <= 7 and new_row >= 0:
-                 if self.board[new_row][new_col] == " ":
-                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
-                    possible_moves.append(new_position)
-            else:
-                break
-        
-        for i in range(1, 8):
-            new_col = col - i
-            new_row = row + i
-            if new_col >= 0 and new_row <= 7:
-                if self.board[new_row][new_col] == " ":
-                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
-                    possible_moves.append(new_position)
-            else:
-                break
-        
-        for i in range(1, 8):
-            new_col = col + i
-            new_row = row + i
-            if new_col <= 7 and new_row <= 7:
-                if self.board[new_row][new_col] == " ":
-                    new_position = chr(new_col + ord("a")) + str(new_row + 1)
-                    possible_moves.append(new_position)
-            else:
-                break
         print(possible_moves)
         return possible_moves
 
@@ -254,17 +232,19 @@ class Pawns(Figure):
     def list_available_moves(self) -> list:
         col, row = getRowCol(self.position)
         possible_moves = []
+        print(row)
         if(row == 1):
             if self.board[row+1][col] == " ":
-                            new_position = chr(col + ord("a")) + str(row+1 + 1)
-                            possible_moves.append(new_position)
-            if self.board[row+2][col] == " ":
+                new_position = chr(col + ord("a")) + str(row+1 + 1)
+                possible_moves.append(new_position)
+                if self.board[row+2][col] == " ":
                             new_position = chr(col + ord("a")) + str(row+2 + 1)
                             possible_moves.append(new_position)
         else:
             if self.board[row+1][col] == " ":
                             new_position = chr(col + ord("a")) + str(row+1 + 1)
                             possible_moves.append(new_position)
+        print(possible_moves)
         return possible_moves
     def validate_move(dest_field) -> bool:
         True
