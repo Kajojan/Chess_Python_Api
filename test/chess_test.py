@@ -99,7 +99,6 @@ def test_not_emptyBoard_King_moves():
     chess_board.place_piece("F1", "Bishop")
     chess_board.place_piece("D1", "Queen")
     chess_board.place_piece("E1", "King")
-    print(chess_board.board)
     king = King("E1", chess_board.board)
 
     assert king.list_available_moves() == ["d2", "e2", "f2"]

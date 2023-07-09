@@ -57,7 +57,6 @@ def valid(chess_figure, current_field, dest_field):
         try:
             figure_class = globals()[chess_figure.lower().capitalize()]
             ches = figure_class(f"{current_field}", chessboard.board)
-            print(ches.validate_move(dest_field))
             if ches.validate_move(dest_field):
                 status_code = 200
                 error = None
