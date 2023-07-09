@@ -4,17 +4,16 @@ from board import Board
 
 app = Flask(__name__)
 chessboard = Board()
-chessboard.place_piece("E4", "King")
-chessboard.place_piece("E3", "King")
+# chessboard.create()
 
 
-@app.route("/api/v1/<chess_figure>/<current_field>/")
+@app.route("/api/v1/<chess_figure>/<current_field>")
 def aviablemoves(chess_figure, current_field):
     try:
         figure_class = globals()[chess_figure.lower().capitalize()]
     except KeyError:
         status_code = 404
-        error = f"Class '{chess_figure}' not found"
+        error = f"Figure '{chess_figure}' not found"
         aviablemoves = []
     else:
         try:
@@ -39,6 +38,47 @@ def aviablemoves(chess_figure, current_field):
     response.status_code = status_code
 
     print(response)
+    return response
+
+
+@app.route("/api/v1/<chess_figure>/<current_field>/<dest_field>")
+def valid(chess_figure, current_field, dest_field):
+    try:
+        figure_class = globals()[chess_figure.lower().capitalize()]
+    except KeyError:
+        status_code = 404
+        error = f"Class '{chess_figure}' not found"
+        move = "invalid"
+    else:
+        try:
+            figure_class = globals()[chess_figure.lower().capitalize()]
+            ches = figure_class(f"{current_field}", chessboard.board)
+            print(ches.validate_move(dest_field))
+            if ches.validate_move(dest_field):
+                status_code = 200
+                error = None
+                move = "valid"
+            else:
+                status_code = 409
+                error = "Current move is not permitted."
+                move = "invalid"
+
+        except ValueError as err:
+            move = "invalid"
+            status_code = 409
+            error = str(err)
+
+    response = make_response(
+        {
+            "move": move,
+            "error": error,
+            "figure": chess_figure,
+            "currentField": current_field,
+            "destField": dest_field,
+        }
+    )
+    response.status_code = status_code
+
     return response
 
 
