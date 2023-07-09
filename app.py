@@ -4,7 +4,7 @@ from board import Board
 
 app = Flask(__name__)
 chessboard = Board()
-# chessboard.create()
+chessboard.create()
 
 
 @app.route("/healthcheck")
