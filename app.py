@@ -7,6 +7,11 @@ chessboard = Board()
 # chessboard.create()
 
 
+@app.route("/healthcheck")
+def healthcheck():
+    return "check"
+
+
 @app.route("/api/v1/<chess_figure>/<current_field>")
 def aviablemoves(chess_figure, current_field):
     try:
@@ -37,7 +42,6 @@ def aviablemoves(chess_figure, current_field):
     )
     response.status_code = status_code
 
-    print(response)
     return response
 
 
@@ -83,4 +87,4 @@ def valid(chess_figure, current_field, dest_field):
 
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run(host="0.0.0.0", port=8000)
