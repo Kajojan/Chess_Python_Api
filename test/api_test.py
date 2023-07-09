@@ -4,7 +4,7 @@ import pytest
 
 @pytest.fixture
 def api_url():
-    return "http://localhost:8000/api/v1"
+    return "http://app:8000/api/v1"
 
 
 def test_get_available_moves(api_url):
