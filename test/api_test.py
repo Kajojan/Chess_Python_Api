@@ -11,7 +11,7 @@ def test_get_available_moves(api_url):
     chess_figure = "pawns"
     current_field = "H2"
     expected_response = {
-        "availableMoves": ["h3","h4"],
+        "availableMoves": ["h3", "h4"],
         "error": None,
         "figure": "pawns",
         "currentField": "H2",
@@ -27,7 +27,7 @@ def test_get_available_moves_valid_field(api_url):
     current_field = "H15"
     expected_response = {
         "availableMoves": [],
-        "error": 'Invalid row value', 
+        "error": "Invalid row value",
         "figure": "rook",
         "currentField": "H15",
     }

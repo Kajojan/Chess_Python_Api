@@ -10,33 +10,34 @@ chessboard.place_piece("E3", "King")
 
 @app.route("/api/v1/<chess_figure>/<current_field>/")
 def aviablemoves(chess_figure, current_field):
-    
     try:
         figure_class = globals()[chess_figure.lower().capitalize()]
     except KeyError:
-        status_code = 404  # Lub dowolny inny kod błędu HTTP, który uznasz za odpowiedni
+        status_code = 404
         error = f"Class '{chess_figure}' not found"
-        aviablemoves=[]
+        aviablemoves = []
     else:
         try:
             figure_class = globals()[chess_figure.lower().capitalize()]
             ches = figure_class(f"{current_field}", chessboard.board)
-            aviablemoves= list(ches.list_available_moves())
-            error= None
-            status_code=200
+            aviablemoves = list(ches.list_available_moves())
+            error = None
+            status_code = 200
         except ValueError as err:
-            aviablemoves=[]
-            status_code=409
+            aviablemoves = []
+            status_code = 409
             error = str(err)
 
-    response= make_response({
-        "availableMoves": aviablemoves,
-        "error": error,
-        "figure": chess_figure,
-        "currentField": current_field,
-    })
-    response.status_code=status_code
-    
+    response = make_response(
+        {
+            "availableMoves": aviablemoves,
+            "error": error,
+            "figure": chess_figure,
+            "currentField": current_field,
+        }
+    )
+    response.status_code = status_code
+
     print(response)
     return response
 

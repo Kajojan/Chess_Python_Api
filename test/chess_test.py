@@ -1,6 +1,5 @@
 import pytest
 import sys
-from flask import Flask
 
 sys.path.append("../")
 from board import Board
@@ -229,7 +228,7 @@ def test_validate_move_Pawns():
     chess_board = Board()
     chess_board.place_piece("A2", "Pawn")
     pawn = Pawns("A2", chess_board.board)
-    
+
     assert pawn.validate_move("A3") is True
     assert pawn.validate_move("B2") is False
 
