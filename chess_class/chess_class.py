@@ -49,16 +49,16 @@ class King(Figure):
     def __init__(self, position, board):
         super().__init__(position)
         self.board = board
+        self.col, self.row = getRowCol(self.position)
 
     def list_available_moves(self) -> list:
-        col, row = getRowCol(self.position)
         possible_moves = []
         for dx in [-1, 0, 1]:
             for dy in [-1, 0, 1]:
                 if dx == 0 and dy == 0:
                     continue
-                new_col = col + dx
-                new_row = row + dy
+                new_col = self.col + dx
+                new_row = self.row + dy
                 new_position = chr(new_col + ord("a")) + str(new_row + 1)
                 if (
                     0 <= new_col <= 8
@@ -142,7 +142,6 @@ class Queen(Figure):
                     row + i, col + i, possible_moves, self.board
                 ):
                     break
-        print(possible_moves)
         return possible_moves
 
     def validate_move(self, dest_field) -> bool:
@@ -231,7 +230,6 @@ class Bishop(Figure):
                 ):
                     break
 
-        print(possible_moves)
         return possible_moves
 
     def validate_move(self, dest_field) -> bool:

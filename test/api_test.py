@@ -8,12 +8,12 @@ def api_url():
 
 
 def test_get_available_moves(api_url):
-    chess_figure = "rook"
+    chess_figure = "pawns"
     current_field = "H2"
     expected_response = {
-        "availableMoves": ["H3"],
+        "availableMoves": ["h3","h4"],
         "error": None,
-        "figure": "rook",
+        "figure": "pawns",
         "currentField": "H2",
     }
 
@@ -27,7 +27,7 @@ def test_get_available_moves_valid_field(api_url):
     current_field = "H15"
     expected_response = {
         "availableMoves": [],
-        "error": "Field does not exist.",
+        "error": 'Invalid row value', 
         "figure": "rook",
         "currentField": "H15",
     }

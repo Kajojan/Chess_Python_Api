@@ -2,10 +2,9 @@ import pytest
 import sys
 from flask import Flask
 
-sys.path.append("../chess_class/")
 sys.path.append("../")
 from board import Board
-import chess_class
+from chess_class.chess_class import King, Queen, Rook, Knight, Pawns, Bishop
 
 
 # figure movements on empty board
@@ -14,7 +13,7 @@ import chess_class
 def test_emptyBoard_King_moves():
     chessboard = Board()
     chessboard.place_piece("E4", "King")
-    king = chess_class.King("E1", chessboard.board)
+    king = King("E1", chessboard.board)
     moves = king.list_available_moves()
     assert moves == ["d1", "d2", "e2", "f1", "f2"]
 
@@ -22,7 +21,7 @@ def test_emptyBoard_King_moves():
 def test_emptyBoard_Queen_moves():
     chessboard = Board()
     chessboard.place_piece("D1", "Queen")
-    queen = chess_class.Queen("D1", chessboard.board)
+    queen = Queen("D1", chessboard.board)
     assert queen.list_available_moves() == [
         "c1",
         "b1",
@@ -50,7 +49,7 @@ def test_emptyBoard_Queen_moves():
 
 def test_emptyBoard_Rook_moves():
     chessboard = Board()
-    rook = chess_class.Rook("A1", chessboard.board)
+    rook = Rook("A1", chessboard.board)
     chessboard.place_piece("A1", "Rook")
     assert rook.list_available_moves() == [
         "b1",
@@ -72,21 +71,21 @@ def test_emptyBoard_Rook_moves():
 
 def test_emptyBoard_Bishop_moves():
     chessboard = Board()
-    bishop = chess_class.Bishop("C1", chessboard.board)
+    bishop = Bishop("C1", chessboard.board)
     chessboard.place_piece("C1", "Bishop")
     assert bishop.list_available_moves() == ["b2", "a3", "d2", "e3", "f4", "g5", "h6"]
 
 
 def test_emptyBoard_Knight_moves():
     chessboard = Board()
-    knight = chess_class.Knight("B1", chessboard.board)
+    knight = Knight("B1", chessboard.board)
     chessboard.place_piece("B1", "Knight")
     assert knight.list_available_moves() == ["d2", "c3", "a3"]
 
 
 def test_emptyBoard_Pawns_moves():
     chess_board = Board()
-    pawn = chess_class.Pawns("A2", chess_board.board)
+    pawn = Pawns("A2", chess_board.board)
     chess_board.place_piece("A2", "Pawn")
     assert pawn.list_available_moves() == ["a3", "a4"]
 
@@ -100,7 +99,7 @@ def test_not_emptyBoard_King_moves():
     chess_board.place_piece("D1", "Queen")
     chess_board.place_piece("E1", "King")
     print(chess_board.board)
-    king = chess_class.King("E1", chess_board.board)
+    king = King("E1", chess_board.board)
 
     assert king.list_available_moves() == ["d2", "e2", "f2"]
 
@@ -110,7 +109,7 @@ def test_not_emptyBoard_Queen_moves():
     chess_board.place_piece("D1", "Queen")
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("E1", "King")
-    queen = chess_class.Queen("D1", chess_board.board)
+    queen = Queen("D1", chess_board.board)
     assert queen.list_available_moves() == [
         "d2",
         "d3",
@@ -134,7 +133,7 @@ def test_not_emptyBoard_Rook_moves():
     chess_board.place_piece("A1", "Rook")
     chess_board.place_piece("A5", "Pawn")
     chess_board.place_piece("G1", "Knight")
-    rook = chess_class.Rook("A1", chess_board.board)
+    rook = Rook("A1", chess_board.board)
     assert rook.list_available_moves() == [
         "b1",
         "c1",
@@ -151,7 +150,7 @@ def test_not_emptyBoard_Bishop_moves():
     chess_board = Board()
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("A3", "Pawn")
-    bishop = chess_class.Bishop("C1", chess_board.board)
+    bishop = Bishop("C1", chess_board.board)
     assert bishop.list_available_moves() == ["b2", "d2", "e3", "f4", "g5", "h6"]
 
 
@@ -160,7 +159,7 @@ def test_not_emptyBoard_Knight_moves():
     chess_board.place_piece("B1", "Knight")
     chess_board.place_piece("A3", "Pawn")
     chess_board.place_piece("C3", "Pawn")
-    knight = chess_class.Knight("B1", chess_board.board)
+    knight = Knight("B1", chess_board.board)
     assert knight.list_available_moves() == ["d2"]
 
 
@@ -168,7 +167,7 @@ def test_not_emptyBoard_Pawns_moves():
     chess_board = Board()
     chess_board.place_piece("A2", "Pawn")
     chess_board.place_piece("A3", "Bishop")
-    pawn = chess_class.Pawns("A2", chess_board.board)
+    pawn = Pawns("A2", chess_board.board)
     assert pawn.list_available_moves() == []
 
 
@@ -180,7 +179,7 @@ def test_validate_move_King():
     chess_board.place_piece("E1", "King")
     chess_board.place_piece("F1", "Bishop")
     chess_board.place_piece("D1", "Queen")
-    king = chess_class.King("E1", chess_board.board)
+    king = King("E1", chess_board.board)
     assert king.validate_move("E2") is True
     assert king.validate_move("F1") is False
 
@@ -190,7 +189,7 @@ def test_validate_move_Queen():
     chess_board.place_piece("D1", "Queen")
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("E1", "King")
-    queen = chess_class.Queen("D1", chess_board.board)
+    queen = Queen("D1", chess_board.board)
     assert queen.validate_move("D2") is True
     assert queen.validate_move("C1") is False
 
@@ -201,7 +200,7 @@ def test_validate_move_Rook():
     chess_board.place_piece("A1", "Rook")
     chess_board.place_piece("A5", "Pawn")
     chess_board.place_piece("G1", "Knight")
-    rook = chess_class.Rook("A1", chess_board.board)
+    rook = Rook("A1", chess_board.board)
     assert rook.validate_move("A2") is True
     assert rook.validate_move("A5") is False
 
@@ -211,7 +210,7 @@ def test_validate_move_Bishop():
     chess_board.place_piece("C1", "Bishop")
     chess_board.place_piece("A3", "Pawn")
     chess_board.place_piece("F4", "Pawn")
-    bishop = chess_class.Bishop("C1", chess_board.board)
+    bishop = Bishop("C1", chess_board.board)
     assert bishop.validate_move("B2") is True
     assert bishop.validate_move("F4") is False
 
@@ -221,7 +220,7 @@ def test_validate_move_Knight():
     chess_board.place_piece("B1", "Knight")
     chess_board.place_piece("A3", "Pawn")
     chess_board.place_piece("C3", "Pawn")
-    knight = chess_class.Knight("B1", chess_board.board)
+    knight = Knight("B1", chess_board.board)
     assert knight.validate_move("D2") is True
     assert knight.validate_move("C2") is False
 
@@ -229,7 +228,8 @@ def test_validate_move_Knight():
 def test_validate_move_Pawns():
     chess_board = Board()
     chess_board.place_piece("A2", "Pawn")
-    pawn = chess_class.Pawns("A2", chess_board.board)
+    pawn = Pawns("A2", chess_board.board)
+    
     assert pawn.validate_move("A3") is True
     assert pawn.validate_move("B2") is False
 
